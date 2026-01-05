@@ -20,34 +20,30 @@ html,body{
   overflow:hidden;
 }
 
-.back-btn{
+/* ===== HEADER ===== */
+.app-header{
   position:fixed;
-  top:12px;
-  left:12px;
-  z-index:999;
-
+  top:0;
+  left:0;
+  right:0;
+  height:48px;
+  background:#fff;
   display:flex;
   align-items:center;
-  gap:8px;
-
-  padding:10px 14px;
-  background:linear-gradient(135deg,#1b5e20,#dd6969);
-  color:#fff;
-  text-decoration:none;
-  font-size:16px;
+  gap:10px;
+  padding:0 14px;
   font-weight:600;
-
-  border-radius:999px;
-  box-shadow:0 6px 16px rgba(0,0,0,0.25);
-
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-
-  transition:all .25s ease;
+  z-index:1000;
+  box-shadow:0 2px 8px rgba(0,0,0,.12);
 }
 
+.app-header .back{
+  text-decoration:none;
+  font-size:18px;
+  color:#000;
+}
 
-/* slider container */
+/* ===== SLIDER ===== */
 .slider{
   display:flex;
   width:100%;
@@ -55,14 +51,13 @@ html,body{
   overflow-x:auto;
   scroll-snap-type:x mandatory;
   scroll-behavior:smooth;
+  padding-top:48px; /* space for header */
 }
 
-/* hide scrollbar */
 .slider::-webkit-scrollbar{
   display:none;
 }
 
-/* page */
 .page{
   flex:0 0 100%;
   width:100%;
@@ -75,7 +70,6 @@ html,body{
   position:relative;
 }
 
-/* image */
 .page img{
   max-width:100%;
   max-height:100%;
@@ -83,47 +77,129 @@ html,body{
   transition:transform .3s ease;
 }
 
-/* zoom */
 .zoom{
   transform:scale(2);
 }
 
-/* order page */
+/* ===== ORDER PAGE ===== */
 .order{
-  background:#fff;
+  background:linear-gradient(180deg,#ffffff,#f3f6f4);
   color:#222;
-  padding:30px;
+  padding:32px 24px;
   text-align:center;
   flex-direction:column;
 }
 
+.order-card{
+  background:#fff;
+  border-radius:20px;
+  padding:28px 22px;
+  box-shadow:0 12px 30px rgba(0,0,0,.15);
+  max-width:360px;
+  width:100%;
+}
+
 .order h2{
   color:#1b5e20;
-  margin-bottom:10px;
+  margin-bottom:6px;
+}
+
+.divider{
+  width:60px;
+  height:4px;
+  background:#1b5e20;
+  border-radius:99px;
+  margin:10px auto 16px;
 }
 
 .order p{
   font-size:14px;
   margin:8px 0;
+  line-height:1.5;
 }
 
 .wa-btn{
-  margin-top:18px;
-  background:#25d366;
+  margin-top:20px;
+  background:linear-gradient(135deg,#25d366,#1ebe57);
   color:#fff;
   padding:14px 22px;
-  border-radius:12px;
+  border-radius:14px;
   text-decoration:none;
   font-weight:bold;
   font-size:16px;
   display:inline-block;
+  box-shadow:0 8px 18px rgba(37,211,102,.45);
+}
+
+.order small{
+  display:block;
+  margin-top:18px;
+  font-size:12px;
+  color:#777;
+}
+
+/* ===== DOT INDICATOR ===== */
+.dots{
+  position:fixed;
+  bottom:14px;
+  left:50%;
+  transform:translateX(-50%);
+  display:flex;
+  gap:6px;
+  z-index:999;
+}
+
+.dots span{
+  width:7px;
+  height:7px;
+  background:rgba(255,255,255,.4);
+  border-radius:50%;
+  transition:.25s;
+}
+
+.dots span.active{
+  width:18px;
+  border-radius:10px;
+  background:#2e7d32;
+}
+
+.slider{
+  display:flex;
+  width:100%;
+  height:100%;
+  overflow-x:auto;
+  overflow-y:hidden;
+
+  scroll-snap-type:x mandatory;
+  scroll-behavior:smooth;
+
+  padding-top:48px;
+
+  /* ===== HILANGKAN SCROLLBAR HP ===== */
+  scrollbar-width: none;          /* Firefox */
+  -ms-overflow-style: none;       /* IE */
+  overscroll-behavior-x: contain; /* Android Chrome */
+  touch-action: pan-x;
+}
+
+/* Chrome, Safari */
+.slider::-webkit-scrollbar{
+  width:0;
+  height:0;
+  display:none;
 }
 </style>
 </head>
 
 <body>
 
-<a class="back-btn" href="index.html">⬅ Menu</a>
+<!-- HEADER -->
+<header class="app-header">
+  <a href="index.html" class="back">←</a>
+  <span>Beranda</span>
+</header>
+
+<!-- SLIDER -->
 <div class="slider" id="slider">
 
   <div class="page"><img src="img/domba/01.jpg"></div>
@@ -132,34 +208,39 @@ html,body{
   <div class="page"><img src="img/domba/04.jpg"></div>
   <div class="page"><img src="img/domba/05.jpg"></div>
 
-  <!-- ORDER PAGE (HTML) -->
+  <!-- ORDER PAGE -->
   <div class="page order">
-    <h2>Pesan Sekarang</h2>
-    <p>
-      Pakan Domba Cap Burung Kuntul<br>
-      Kualitas terjamin & harga bersaing
-    </p>
+    <div class="order-card">
+      <h2>Pesan Sekarang</h2>
+      <div class="divider"></div>
 
-    <p>
-      📞 WhatsApp Pemesanan<br>
-      <strong>08xxxxxxxxxx</strong>
-    </p>
+      <p>
+        <strong>Pakan Domba Cap Burung Kuntul</strong><br>
+        Kualitas terjamin & harga bersaing
+      </p>
 
-    <a class="wa-btn"
-       href="https://wa.me/6281297625964?text=Halo,%20saya%20ingin%20memesan%20Pakan%20Domba"
-       target="_blank">
-       💬 Chat WhatsApp
-    </a>
+      <p>
+        📞 WhatsApp Pemesanan<br>
+        <strong>08xxxxxxxxxx</strong>
+      </p>
 
-    <p style="margin-top:20px;font-size:12px;color:#666;">
-      Pengiriman seluruh Indonesia
-    </p>
+      <a class="wa-btn"
+         href="https://wa.me/6281297625964?text=Halo,%20saya%20ingin%20memesan%20Pakan%20Domba"
+         target="_blank">
+         💬 Chat WhatsApp
+      </a>
+
+      <small>🚚 Pengiriman seluruh Indonesia</small>
+    </div>
   </div>
 
 </div>
 
+<!-- DOT -->
+<div class="dots" id="dots"></div>
+
 <script>
-/* double tap zoom */
+/* zoom double tap */
 let lastTap = 0;
 document.querySelectorAll(".page img").forEach(img=>{
   img.addEventListener("click",()=>{
@@ -168,6 +249,24 @@ document.querySelectorAll(".page img").forEach(img=>{
       img.classList.toggle("zoom");
     }
     lastTap = now;
+  });
+});
+
+/* dots logic */
+const slider = document.getElementById("slider");
+const pages  = document.querySelectorAll(".page");
+const dots   = document.getElementById("dots");
+
+pages.forEach((_,i)=>{
+  const dot = document.createElement("span");
+  if(i===0) dot.classList.add("active");
+  dots.appendChild(dot);
+});
+
+slider.addEventListener("scroll",()=>{
+  const index = Math.round(slider.scrollLeft / slider.clientWidth);
+  dots.querySelectorAll("span").forEach((d,i)=>{
+    d.classList.toggle("active", i===index);
   });
 });
 </script>
